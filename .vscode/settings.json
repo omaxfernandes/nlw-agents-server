@@ -5,6 +5,7 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.formatOnSave": true,
+  "editor.fontLigatures": false,
   "editor.formatOnPaste": true,
   "emmet.showExpandedAbbreviation": "never",
   "editor.codeActionsOnSave": {

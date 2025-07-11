@@ -1,10 +1,17 @@
-import { reset, seed } from 'drizzle-seed'
-import { db, sql } from './connection.ts'
-import { schema } from './schema/index.ts'
+import { reset, seed } from "drizzle-seed";
+import { db, sql } from "./connection.ts";
+import { rooms } from "./schema/rooms.ts";
+import { questions } from "./schema/questions.ts";
 
-await reset(db, schema)
+// Schema without audioChunks to avoid vector column issues
+const seedSchema = {
+  rooms,
+  questions,
+};
 
-await seed(db, schema).refine((f) => {
+await reset(db, seedSchema);
+
+await seed(db, seedSchema).refine((f) => {
   return {
     rooms: {
       count: 5,
@@ -16,10 +23,10 @@ await seed(db, schema).refine((f) => {
     questions: {
       count: 20,
     },
-  }
-})
+  };
+});
 
-await sql.end()
+await sql.end();
 
 // biome-ignore lint/suspicious/noConsole: only used in dev
-console.log('Database seeded')
+console.log("Database seeded");
